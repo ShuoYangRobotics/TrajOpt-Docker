@@ -23,6 +23,8 @@ RUN   if [ "x$(nproc)" = "x1" ] ; then export USE_PROC=1 ; \
       libgoogle-glog-dev \
       libsuitesparse-dev \
       python-catkin-tools \
+      python3-dev \
+      python3-matplotlib \
       gfortran \
       autoconf \
       coinor-libipopt-dev \
@@ -86,6 +88,36 @@ RUN   git clone https://github.com/ANYbotics/kindr.git && \
       cmake ../ && \
       make -j8 && \
       make install 
+
+# install HPIPM (and BLASFEO, which is a dependency) because control toolbox uses them
+WORKDIR $CPP_WS
+RUN   git clone https://github.com/giaf/blasfeo.git && \
+      cd blasfeo && \
+      make static_library && sudo make install_static
+      
+WORKDIR $CPP_WS
+RUN   git clone https://github.com/giaf/hpipm.git && \
+      cd hpipm && \
+      make static_library && make examples && sudo make install_static
+
+# install cppad, another tool control toolbox use. althouhg we use casadi
+WORKDIR $CPP_WS
+RUN   git clone https://github.com/coin-or/CppAD.git cppad.git && \
+      cd cppad.git && \
+      mkdir build && \
+      cd build && \
+      cmake .. && \
+      make && sudo make install 
+
+WORKDIR $CPP_WS
+RUN   git clone https://github.com/joaoleal/CppADCodeGen.git CppADCodeGen && \
+      cd CppADCodeGen && \ 
+      mkdir build && \
+      cd build && \
+      cmake .. && \
+      make && make install
+
+
 
 # install control toolbox
 WORKDIR $CPP_WS
