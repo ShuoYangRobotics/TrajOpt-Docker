@@ -3,7 +3,7 @@
 
 #include <ct/optcon/optcon.h>
 #include "info/infoDir.h"
-// #include <plotResultsOscillator.h>
+#include <plotResultsOscillator.h>
 
 using namespace ct::core;
 using namespace ct::optcon;
@@ -124,5 +124,5 @@ int main(int argc, char** argv)
     // STEP 4: retrieve the solution
     ct::core::StateFeedbackController<state_dim, control_dim> solution = nloc.getSolution();
     // plot the output
-    // plotResultsOscillator<state_dim, control_dim>(solution.x_ref(), solution.uff(), solution.time());
+    plotResultsOscillator<state_dim, control_dim>(solution.x_ref(), solution.uff(), solution.time());
 }
