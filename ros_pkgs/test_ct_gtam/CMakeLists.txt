@@ -58,22 +58,28 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/info/infoDir.h.in ${CMAKE_CURRENT_SOU
 
 
 # test control toolbox initial installation
-add_executable(test_ct ${CMAKE_CURRENT_SOURCE_DIR}/src/test_ct.cpp)
-target_link_libraries( test_ct
-                          ${catkin_LIBRARIES} 
-                          ct_core
-                          )
-# test using control toolbox to solve iLQR
-add_executable(ct_ilqr ${CMAKE_CURRENT_SOURCE_DIR}/src/ct_ilqr.cpp)
-target_link_libraries( ct_ilqr
-                          ${catkin_LIBRARIES} 
-                          ct_core
-                          ct_optcon
-                          )                          
+# add_executable(test_ct ${CMAKE_CURRENT_SOURCE_DIR}/src/test_ct.cpp)
+# target_link_libraries( test_ct
+#                           ${catkin_LIBRARIES} 
+#                           ct_core
+#                           )
+# # test using control toolbox to solve iLQR
+# add_executable(ct_ilqr ${CMAKE_CURRENT_SOURCE_DIR}/src/ct_ilqr.cpp)
+# target_link_libraries( ct_ilqr
+#                           ${catkin_LIBRARIES} 
+#                           ct_core
+#                           ct_optcon
+#                           )                          
 
 
-add_executable(test_gtsam ${CMAKE_CURRENT_SOURCE_DIR}/src/test_gtsam.cpp)
-target_link_libraries( test_gtsam
+# add_executable(test_gtsam ${CMAKE_CURRENT_SOURCE_DIR}/src/test_gtsam.cpp)
+# target_link_libraries( test_gtsam
+#                           ${catkin_LIBRARIES} 
+#                           gtsam
+#                           )
+add_executable(test_noisemodel ${CMAKE_CURRENT_SOURCE_DIR}/src/test_noisemodel.cpp)
+target_link_libraries( test_noisemodel
                           ${catkin_LIBRARIES} 
                           gtsam
+                          CppUnitLite
                           )
